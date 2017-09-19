@@ -27,7 +27,8 @@ function insertIntoGuestTableUsingObjectOriented(){
 VALUES ('Piash', 'Sarker', 'piash@example.com')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "</br> New record created successfully";
+        $last_id = $conn->insert_id ;
+        echo "</br> New record created successfully id ".$last_id;
     } else {
         echo "</br> Error: " . $sql . "<br>" . $conn->error;
     }
@@ -52,7 +53,9 @@ function insertIntoGuestTableUsingProcedural(){
 VALUES ('Piash ', 'Sarker', 'piash@example.com')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "</br> New record created successfully";
+        $last_id = mysqli_insert_id($conn);
+        echo "</br> New record created successfully . Id ".$last_id;
+
     } else {
         echo "</br> Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -75,7 +78,8 @@ function insertIntoGuestTableUsingPDO(){
     VALUES ('John', 'Doe', 'john@example.com')";
         // use exec() because no results are returned
         $conn->exec($sql);
-        echo "</br> New record created successfully";
+        $last_id = $conn-> lastInsertId();
+        echo "</br> New record created successfully id ".$last_id;
     }
     catch(PDOException $e)
     {
